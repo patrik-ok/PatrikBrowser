@@ -9,7 +9,20 @@ import android.util.Log;
 public class LogUtils {
     private static  boolean mDebug = false;
     private static final String mTAG = "patrik_";
+    private static final String mStrIndex= "com.";
     public static void e(Object obj,String... strs){
+        execute(obj,1,strs);
+    }
+    public static void w(Object obj,String... strs){
+        execute(obj,2,strs);
+    }
+    public static void setDebug(boolean isDebug){
+        mDebug = isDebug;
+    }
+    public static boolean isDebug(){
+        return mDebug;
+    }
+    private static void execute(Object obj,int type,String... strs){
         if(mDebug){
             StringBuilder builderTag = new StringBuilder();
             StringBuilder builderContent = new StringBuilder();
@@ -21,18 +34,22 @@ public class LogUtils {
                 if(i != strs.length-1){
                     builderContent.append(" || ");
                 }else{
+                    String packageLongStr = obj.getClass().getPackage().toString();
                     builderContent.append("\n");
-                    builderContent.append(obj.getClass().getPackage());
+                    builderContent.append("at");
+                    builderContent.append("\t");
+                    builderContent.append(packageLongStr.substring(packageLongStr.indexOf(mStrIndex)));
                 }
             }
-            Log.e(builderTag.toString(),builderContent.toString());
+            switch (type){
+                case 1:
+                    Log.e(builderTag.toString(),builderContent.toString());
+                    break;
+                case 2:
+                    Log.w(builderTag.toString(),builderContent.toString());
+                    break;
+            }
         }
-    }
-    public static void setDebug(boolean isDebug){
-        mDebug = isDebug;
-    }
-    public static boolean isDebug(){
-        return mDebug;
     }
 
 }
