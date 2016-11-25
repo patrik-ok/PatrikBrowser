@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.patrik.browser"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+        /** disable 'InvalidPackage'
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'*/
+    }
+
+    packagingOptions {
+        /** exclude '.readme'*/
+    }
+
+    productFlavors {
+        version_debug {
+            versionName = "D" + defaultConfig.versionName
+            buildConfigField "int", "APP_MODE", "-1"
+        }
+        version_release {
+            versionName = "V" + defaultConfig.versionName
+            buildConfigField "int", "APP_MODE", "1"
+        }
+        version_test {
+            versionName = "T" + defaultConfig.versionName
+            buildConfigField "int", "APP_MODE", "0"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.anthonycr.grant:permissions:1.1.2'
+    compile 'org.greenrobot:eventbus:3.0.0'
+}

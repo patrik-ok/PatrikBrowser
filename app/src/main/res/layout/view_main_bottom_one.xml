@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.patrik.browser.view.MainBottomDefaultBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_dcdcdc"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/iv_bottom_back"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/left_black_arrow"/>
+
+    <ImageButton
+        android:id="@+id/iv_bottom_go_ahead"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/right_black_arrow"/>
+
+    <ImageButton
+        android:id="@+id/iv_bottom_pop"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/menu_black"/>
+
+    <ImageButton
+        android:id="@+id/iv_bottom_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/home_black"/>
+
+    <FrameLayout
+        android:id="@+id/fl_bottom_tab"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:background="@android:color/transparent"
+        android:layout_gravity="center">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:background="@null"
+            android:src="@mipmap/rect_black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:text="1"
+            android:textSize="12sp"
+            android:textColor="@color/color_444444"
+            android:textStyle="bold"
+            android:typeface="sans" />
+    </FrameLayout>
+</com.patrik.browser.view.MainBottomDefaultBar>

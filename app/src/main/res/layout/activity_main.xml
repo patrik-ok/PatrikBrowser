@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+    <FrameLayout
+        android:id="@+id/pop_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_5f000000"
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        android:orientation="vertical"
+        android:visibility="invisible" />
+    <ViewStub
+        android:id="@+id/main_view_stub_one"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_gravity="bottom"
+        android:layout="@layout/view_main_bottom_one"/>
+    <ViewStub
+        android:id="@+id/main_view_stub_two"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_gravity="bottom"
+        android:layout="@layout/view_main_bottom_two"/>
+</FrameLayout>

@@ -1,0 +1,42 @@
+# Android Studio
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Local configuration file (sdk path, etc)
+local.properties
+gradle.properties
+.directory
+
+# Intellij project files
+*.ipr
+*.iws
+.idea/
+
+# Gradle
+build
+.gradle
+
+# //
+*.apk
+*.ap_
+*.dex
+*.class
+build.xml
+.DS_Store
+gen/
+.gradle/
+proguard/
+out
+.settings/
+*.swp
+*~

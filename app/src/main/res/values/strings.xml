@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">play code</string>
+    <string name="str_night_mode">Nighttime</string>
+    <string name="str_text_only">Text only</string>
+    <string name="str_full_screen">Full screen</string>
+    <string name="str_incognito">Incognito</string>
+    <string name="str_add_bookmark">Add bookmarks</string>
+    <string name="str_bookmark">Bookmark</string>
+    <string name="str_refresh">Refresh</string>
+    <string name="str_download_manage">Download</string>
+    <string name="str_share">Share</string>
+    <string name="str_screenshot">Screenshot</string>
+    <string name="str_bright">Bright</string>
+    <string name="str_update">Update</string>
+</resources>
