@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/bottom_bar_height">
+    android:paddingBottom="@dimen/vpadding48dp">
 
     <LinearLayout
         android:id="@+id/menu_container"
@@ -15,8 +15,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80.5dp"
-            android:layout_marginBottom="0.5dp"
+            android:layout_height="@dimen/vheight85.5dp"
+            android:layout_marginBottom="@dimen/vmargin0.5dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -47,8 +47,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85.5dp"
-            android:layout_marginBottom="0.5dp"
+            android:layout_height="@dimen/vheight85.5dp"
+            android:layout_marginBottom="@dimen/vmargin0.5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -79,7 +79,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85.5dp"
+            android:layout_height="@dimen/vheight85.5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -107,12 +107,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="15dp"
+                    android:paddingBottom="@dimen/vpadding10dp"
+                    android:paddingTop="@dimen/vpadding15dp"
                     android:gravity="center"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/text_size_12"
                     android:textColor="@color/color_444444"
-                    android:drawablePadding="2dp"
+                    android:drawablePadding="@dimen/padding2dp"
                     android:drawableTop="@mipmap/update_black"
                     android:text="@string/str_update" />
                 <ImageView
@@ -120,9 +120,9 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="@dimen/vmargin10dp"
+                    android:layout_marginLeft="@dimen/hmargin15dp"
+                    android:layout_marginStart="@dimen/hmargin15dp"
                     android:visibility="gone"/>
             </FrameLayout>
         </LinearLayout>

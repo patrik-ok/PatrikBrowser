@@ -1,10 +1,34 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="layout_weight_width">0dp</dimen>
-    <dimen name="title_bar_height">48dp</dimen>
-    <dimen name="bottom_bar_height">48dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Default screen margins -->
+    <!--textSize-->
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
 
-    <dimen name="tv_size_14sp">14sp</dimen>
+
+
+    <!--vertical-->
+    <!--margin -->
+    <dimen name="vmargin0.5dp">0.5dp</dimen>
+    <dimen name="vmargin10dp">10dp</dimen>
+    <dimen name="vmargin48dp">48dp</dimen>
+    <!--padding -->
+    <dimen name="vpadding10dp">10dp</dimen>
+    <dimen name="vpadding15dp">15dp</dimen>
+    <dimen name="vpadding48dp">48dp</dimen>
+    <!--height-->
+    <dimen name="vheight85.5dp">85.5dp</dimen>
+    <dimen name="vheight48dp">48dp</dimen>
+
+
+    <!--horizontal-->
+    <!--margin -->
+    <dimen name="hmargin15dp">15dp</dimen>
+    <!--padding -->
+
+    <!--height-->
+
+
+
+    <!--normal-->
+    <dimen name="padding2dp">2dp</dimen>
 </resources>

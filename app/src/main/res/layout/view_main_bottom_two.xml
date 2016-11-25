@@ -6,7 +6,7 @@
     android:background="@color/color_dcdcdc">
     <ImageButton
         android:id="@+id/iv_bottom_setting"
-        android:layout_width="@dimen/layout_weight_width"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@android:color/transparent"
