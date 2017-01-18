@@ -7,14 +7,13 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * PermissionManageUtils
  * Create by patrik on 2016/11/25.
  */
 public class PermissionUtils {
+    private String packageName = this.getClass().getPackage().toString();
+    private String className = this.getClass().getSimpleName() ;
     private final int permissionRequestCode = 88;
     private PermissionCallback permissionRunnable;
 
@@ -25,7 +24,11 @@ public class PermissionUtils {
 
     public static PermissionUtils getInstance() {
         if (sInstance == null) {
-            sInstance = new PermissionUtils();
+            synchronized (PermissionUtils.class){
+                if (sInstance == null) {
+                    sInstance = new PermissionUtils();
+                }
+            }
         }
         return sInstance;
     }
@@ -81,14 +84,14 @@ public class PermissionUtils {
                     permissionRunnable = null;
                 }
             } else {
-                LogUtils.e(this,"permission denied");
+                LogUtils.e(className,packageName,"permission denied");
                 if (permissionRunnable != null) {
                     permissionRunnable.noPermission();
                     permissionRunnable = null;
                 }
             }
         } else {
-            LogUtils.e(this,"Must execute super.onRequestPermissionsResult() at first line in this method");
+            LogUtils.e(className,packageName,"Must execute super.onRequestPermissionsResult() at first line in this method");
             throw new IllegalArgumentException("Must execute super.onRequestPermissionsResult() at first line in this method");
         }
 
@@ -122,25 +125,16 @@ public class PermissionUtils {
      * you can also put content to customApplication class from below
      */
     final int PERMISSIONS_CODE = 0x0FFFFF;
-    final Map<String, Boolean> PERMISSION_TABLE = new HashMap<String, Boolean>() {
-        {
-            put(Manifest.permission.READ_EXTERNAL_STORAGE, false);
-            put(Manifest.permission.WRITE_EXTERNAL_STORAGE, false);
-            put(Manifest.permission.READ_PHONE_STATE, false);
-            put(Manifest.permission.CAMERA, false);
-        }
+    final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE
     };
-
-    public void requestPermission(Activity activity) {
+    public void requestAllPermission(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String key : PERMISSION_TABLE.keySet()) {
-                if (!PERMISSION_TABLE.get(key) &&
-                        activity.checkSelfPermission(key) != PackageManager.PERMISSION_GRANTED) {
-                    activity.requestPermissions(new String[]{
-                            key
-                    }, PERMISSIONS_CODE);
-                }
-            }
+            activity.requestPermissions(PERMISSIONS, PERMISSIONS_CODE);
         }
     }
+
 }

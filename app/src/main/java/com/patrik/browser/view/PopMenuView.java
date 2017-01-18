@@ -20,6 +20,8 @@ import com.patrik.browser.tool.LogUtils;
  * Create by patrik on 2016/8/30.
  */
 public class PopMenuView extends FrameLayout implements View.OnClickListener, View.OnTouchListener {
+    private String packageName = this.getClass().getPackage().toString();
+    private String className = this.getClass().getSimpleName() ;
     private Context mContext;
 
     public PopMenuView(Context context, AttributeSet attrs) {
@@ -102,7 +104,7 @@ public class PopMenuView extends FrameLayout implements View.OnClickListener, Vi
      * @return void
      */
     private void onScreenShot() {
-        LogUtils.e(this,"onScreenShot");
+        LogUtils.e(className,packageName,"onScreenShot");
 
         Rect frame = new Rect();
         MainActivity mainActivity = ((MainActivity) (mContext));

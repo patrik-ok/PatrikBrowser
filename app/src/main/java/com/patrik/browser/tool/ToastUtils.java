@@ -12,13 +12,13 @@ public class ToastUtils {
     private ToastUtils() {
     }
     public static ToastUtils getInstance(Context context){
-        mContext = context;
+        mContext = context.getApplicationContext();
         return  ourInstance;
     }
     public void showToast(int stringId){
         Toast.makeText(mContext,stringId , Toast.LENGTH_SHORT).show();
     }
-    public  void showTestToast(String stringId){
+    public  void showToast(String stringId){
         Toast.makeText(mContext,stringId , Toast.LENGTH_SHORT).show();
     }
 }

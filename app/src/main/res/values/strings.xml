@@ -12,4 +12,5 @@
     <string name="str_screenshot">Screenshot</string>
     <string name="str_bright">Bright</string>
     <string name="str_update">Update</string>
+    <string name="str_permisson_deny">Permission denied</string>
 </resources>
