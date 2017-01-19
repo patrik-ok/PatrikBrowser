@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.patrik.browser.BuildConfig;
 import com.patrik.browser.tool.LogUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -35,7 +36,9 @@ public class MyApplication extends Application {
             mAppContext = this.getBaseContext();
         }
         if(BuildConfig.APP_MODE != 1){
+            //Test environment  (#patrik)2017/1/18.
             LogUtils.setDebug(true);
+            LeakCanary.install(this);
         }else{
             LogUtils.setDebug(false);
         }
