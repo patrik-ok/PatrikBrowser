@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import com.patrik.browser.R;
-import com.patrik.browser.event.EvtPop;
+import com.patrik.browser.event.EvtHome;
 import com.patrik.browser.tool.Constants;
+import com.patrik.browser.view.CustomWebview;
 import com.patrik.browser.view.MainBottomControlBar;
 import com.patrik.browser.view.MainBottomDefaultBar;
 import com.patrik.browser.view.PopMenuView;
@@ -20,16 +22,19 @@ import com.patrik.browser.view.PopMenuView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 /**
  * MainActivity
  * Create by patrik on 2016/8/29.
  */
 
-public class MainActivity extends BaseActivity implements View.OnTouchListener{
+public class MainActivity extends BaseActivity implements View.OnTouchListener {
     private MainBottomDefaultBar mBtmDefaultBar;
     private MainBottomControlBar mBtmControlBar;
     private FrameLayout mPopMask;
     private Handler mHandler = new Handler();
+    private ScrollView scrollView_homepage;
+    private CustomWebview webview_homepage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,14 +78,21 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener{
         mBtmDefaultBar = (MainBottomDefaultBar) main_view_stub_one.inflate();
         ViewStub main_view_stub_two = (ViewStub) findViewById(R.id.main_view_stub_two);
         mBtmControlBar = (MainBottomControlBar) main_view_stub_two.inflate();
+        scrollView_homepage = (ScrollView) findViewById(R.id.scrollView_homepage);
+        webview_homepage = (CustomWebview) findViewById(R.id.webview_homepage);
+        webview_homepage.loadUrl(Constants.DEFAULT_URL);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void EvtOnPop(EvtPop event) {
+    public void EvtHome(EvtHome event) {
         if (event.getActionInt() == Constants.POP_SHOW) {
             show();
         } else if (event.getActionInt() == Constants.POP_HIDE) {
             hide();
+        } else if (event.getActionInt() == Constants.GOBACK) {
+           webview_homepage.goBack();
+        } else if (event.getActionInt() == Constants.GOFORWARD) {
+           webview_homepage.goForward();
         }
     }
 
@@ -117,12 +129,17 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener{
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mBtmDefaultBar.onDestroy();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && mBtmDefaultBar.getPopMenuView().getVisibility()==View.VISIBLE){
+        if (keyCode == KeyEvent.KEYCODE_BACK && mBtmDefaultBar.getPopMenuView().getVisibility() == View.VISIBLE) {
             hide();
+            return false;
+        }
+        if (webview_homepage.canGoBack()) {
+            webview_homepage.goBack();
             return false;
         }
         finish();
@@ -133,8 +150,8 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener{
     public boolean onTouch(View v, MotionEvent event) {
         boolean result = true;
         PopMenuView popMenuView = mBtmDefaultBar.getPopMenuView();
-        View popContent = ((ViewGroup)popMenuView.getChildAt(0)).getChildAt(0);
-        if (popMenuView.getVisibility()!= View.GONE) {
+        View popContent = ((ViewGroup) popMenuView.getChildAt(0)).getChildAt(0);
+        if (popMenuView.getVisibility() != View.GONE) {
             if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
                 int touchX = (int) event.getRawX();
                 int touchY = (int) event.getRawY();
@@ -144,10 +161,10 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener{
                 int x_begin = location[0];
                 int y_begin = location[1];
                 int x_end = x_begin + popContent.getRight() - popContent.getLeft();
-                if(touchY<=y_begin && touchX<=x_end && touchX>=x_begin){
+                if (touchY <= y_begin && touchX <= x_end && touchX >= x_begin) {
                     result = true;
                     hide();
-                }else{
+                } else {
                     result = false;
                 }
             }

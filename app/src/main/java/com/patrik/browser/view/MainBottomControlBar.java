@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.patrik.browser.R;
-import com.patrik.browser.event.EvtPop;
+import com.patrik.browser.event.EvtHome;
 import com.patrik.browser.tool.Constants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -60,7 +60,7 @@ public class MainBottomControlBar extends LinearLayout implements View.OnClickLi
 
     }
     private void bottomPopCloseClick(){
-        EventBus.getDefault().post(new EvtPop(Constants.POP_HIDE));
+        EventBus.getDefault().post(new EvtHome(Constants.POP_HIDE));
     }
     private void bottomExitClick(){
         System.exit(0);

@@ -7,15 +7,23 @@ import android.util.Log;
  * Create by patrik on 2016/8/29.
  */
 public class LogUtils {
-    private static boolean mDebug = false;
+    private static boolean mDebug = true;
     private static final String mTAG = "patrik_";
 
     public static void e(String className, String packageName, String... strs) {
-        execute(className, packageName, 1, strs);
+        execute(mDebug, className, packageName, 1, strs);
+    }
+
+    public static void e(boolean isDebug, String className, String packageName, String... strs) {
+        execute(isDebug, className, packageName, 1, strs);
     }
 
     public static void w(String className, String packageName, String... strs) {
-        execute(className, packageName, 2, strs);
+        execute(mDebug, className, packageName, 2, strs);
+    }
+
+    public static void w(boolean isDebug, String className, String packageName, String... strs) {
+        execute(isDebug, className, packageName, 2, strs);
     }
 
     public static void setDebug(boolean isDebug) {
@@ -26,8 +34,8 @@ public class LogUtils {
         return mDebug;
     }
 
-    private static void execute(String className, String packageName, int type, String... strs) {
-        if (mDebug) {
+    private static void execute(boolean isdebug, String className, String packageName, int type, String... strs) {
+        if (isdebug) {
             StringBuilder builderTag = new StringBuilder();
             StringBuilder builderContent = new StringBuilder();
             builderTag.append(mTAG);

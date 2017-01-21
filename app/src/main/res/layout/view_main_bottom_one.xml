@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:src="@mipmap/left_black_arrow"/>
+        android:src="@drawable/selector_btm_bar_arrow_left"/>
 
     <ImageButton
         android:id="@+id/iv_bottom_go_ahead"
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:src="@mipmap/right_black_arrow"/>
+        android:src="@drawable/selector_btm_bar_arrow_right"/>
 
     <ImageButton
         android:id="@+id/iv_bottom_pop"

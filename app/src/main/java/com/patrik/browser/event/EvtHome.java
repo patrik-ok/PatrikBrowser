@@ -2,14 +2,16 @@ package com.patrik.browser.event;
 
 /**
  * usage
- * Create by patrik on 2016/11/25.
+ * Create by patrik on 2017/1/21.
  */
-public class EvtPop {
+public class EvtHome {
     public int mAction;
-    public EvtPop(int action){
+
+    public EvtHome(int action) {
         this.mAction = action;
     }
-    public int getActionInt(){
+
+    public int getActionInt() {
         return this.mAction;
     }
 }

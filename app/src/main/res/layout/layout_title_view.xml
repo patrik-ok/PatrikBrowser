@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:drawableLeft="@mipmap/left_black_arrow"
-            android:drawableStart="@mipmap/left_black_arrow"
+            android:drawableLeft="@mipmap/left_black_arrow_light"
+            android:drawableStart="@mipmap/left_black_arrow_light"
             android:text="@string/app_name"
             android:gravity="center" />
 
