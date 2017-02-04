@@ -1,14 +1,11 @@
 package com.patrik.browser.view;
 
 import android.content.Context;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,11 +24,11 @@ import org.greenrobot.eventbus.ThreadMode;
  * usage
  * Create by patrik on 2017/1/22.
  */
-public class ContentViewInput extends LinearLayout implements View.OnClickListener, TextWatcher {
+public class ContentViewInput extends LinearLayout implements View.OnClickListener,CustomMutipleFuncEditText.OnMutipleLisen{
     private CustomWebview webview_homepage;
     private ImageView iv_action;
     private TextView tv_action;
-    private EditText edit_home_inputurl;
+    private CustomMutipleFuncEditText edit_home_inputurl;
     private final String str_go = getResources().getString(R.string.str_action_go);
     private final String str_cancel = getResources().getString(R.string.str_action_cancel);
 
@@ -46,12 +43,12 @@ public class ContentViewInput extends LinearLayout implements View.OnClickListen
     }
 
     private void initView() {
-        edit_home_inputurl = (EditText) findViewById(R.id.edit_home_inputurl);
+        edit_home_inputurl = (CustomMutipleFuncEditText) findViewById(R.id.edit_home_inputurl);
         webview_homepage = (CustomWebview) findViewById(R.id.webview_homepage);
         tv_action = (TextView) findViewById(R.id.tv_action);
         iv_action = (ImageView) findViewById(R.id.iv_action);
+        edit_home_inputurl.setOnMutipleLisen(this);
         tv_action.setOnClickListener(this);
-        edit_home_inputurl.addTextChangedListener(this);
         iv_action.setOnClickListener(this);
         EventBus.getDefault().register(this);
     }
@@ -118,33 +115,9 @@ public class ContentViewInput extends LinearLayout implements View.OnClickListen
 
         return !(Patterns.WEB_URL.matcher(url).matches());
     }
-    private void editChanged(int length) {
-        tv_action.setVisibility(View.VISIBLE);
-        iv_action.setVisibility(View.GONE);
-        if (length > 0) {
-            tv_action.setText(str_go);
-        } else {
-            tv_action.setText(str_cancel);
-        }
-    }
 
     public CustomWebview getCustomWebview() {
         return webview_homepage;
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        editChanged(s.length());
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
     }
 
     private OnInputEditAction listener;
@@ -160,6 +133,7 @@ public class ContentViewInput extends LinearLayout implements View.OnClickListen
             edit_home_inputurl.requestFocus();
         }else{
             imm.hideSoftInputFromWindow(edit_home_inputurl.getWindowToken(),0);
+            edit_home_inputurl.clearFocus();
         }
     }
     public void onDestroy() {
@@ -167,4 +141,14 @@ public class ContentViewInput extends LinearLayout implements View.OnClickListen
     }
 
 
+    @Override
+    public void editChange(int length, boolean isSetTxt) {
+        tv_action.setVisibility(View.VISIBLE);
+        iv_action.setVisibility(View.GONE);
+        if (length > 0) {
+            tv_action.setText(str_go);
+        } else {
+            tv_action.setText(str_cancel);
+        }
+    }
 }

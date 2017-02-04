@@ -33,6 +33,7 @@
 
     <!--normal-->
     <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
     <dimen name="dimen_6dp">6dp</dimen>
     <dimen name="dimen_10dp">10dp</dimen>
 </resources>

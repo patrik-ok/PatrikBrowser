@@ -17,4 +17,6 @@
     <string name="str_action_go">Go</string>
     <string name="str_action_cancel">Cancel</string>
     <string name="str_exit">Press back again to exit</string>
+    <string name="str_not_support">Some specail characters are not supported.</string>
+    <string name="str_input_limit">Input %1$s characters at most</string>
 </resources>

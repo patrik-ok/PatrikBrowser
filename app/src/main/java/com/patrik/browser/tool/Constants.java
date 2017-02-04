@@ -5,6 +5,7 @@ package com.patrik.browser.tool;
  * Create by patrik on 2016/11/25.
  */
 public class Constants {
+    public static final int INPUTMAX_LIMIT = 1000;
     /**
      * pop
      */

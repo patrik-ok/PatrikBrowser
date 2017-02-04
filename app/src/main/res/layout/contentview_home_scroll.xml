@@ -4,50 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.patrik.browser.view.LinearInputEditText
+    <TextView
+        android:id="@+id/tv_fade_input_homepage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/vheight36dp"
         android:layout_marginEnd="@dimen/hmargin15dp"
         android:layout_marginStart="@dimen/hmargin15dp"
         android:layout_marginTop="@dimen/vmargin22dp"
+        android:layout_weight="1"
         android:background="@drawable/shape_home_input_edit"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/str_enter_url"
-            android:minHeight="0dp"
-            android:paddingEnd="@dimen/dimen_10dp"
-            android:paddingStart="@dimen/dimen_10dp"
-            android:textColorHint="@color/color_b7b7b7"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/color_dcdcdc" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minWidth="50dp"
-            android:paddingEnd="@dimen/dimen_2dp"
-            android:paddingStart="@dimen/dimen_2dp"
-            android:text="@string/str_action_cancel" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="50dp"
-            android:src="@mipmap/refresh_black"
-            android:visibility="gone" />
-    </com.patrik.browser.view.LinearInputEditText>
+        android:hint="@string/str_enter_url"
+        android:minHeight="0dp"
+        android:paddingEnd="@dimen/dimen_10dp"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:textColorHint="@color/color_b7b7b7"
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scrollView_homepage"

@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <EditText
+    <com.patrik.browser.view.CustomMutipleFuncEditText
         android:id="@+id/edit_home_inputurl"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -19,10 +19,12 @@
         android:gravity="center_vertical"
         android:hint="@string/str_enter_url"
         android:minHeight="0dp"
-        android:paddingEnd="@dimen/dimen_10dp"
+        android:paddingEnd="@dimen/dimen_5dp"
         android:paddingStart="@dimen/dimen_10dp"
         android:textColorHint="@color/color_b7b7b7"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:imeOptions="flagNoExtractUi"
+        android:inputType="textUri"/>
 
     <View
         android:layout_width="1px"
