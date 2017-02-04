@@ -31,5 +31,9 @@ public class Constants {
     public static final int GOBACK = GOFORWARD + 1;
     public static final int LOADING = GOBACK + 1;
     public static final int PAGEFINISH = LOADING + 1;
+    /**
+     * goback
+     */
+    public static final int GOFIRSTPAGE = PAGEFINISH + 1;
 
 }

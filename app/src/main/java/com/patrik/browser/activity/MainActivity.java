@@ -31,7 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Create by patrik on 2016/8/29.
  */
 
-public class MainActivity extends BaseActivity implements View.OnTouchListener,OnInputEditAction {
+public class MainActivity extends BaseActivity implements View.OnTouchListener, OnInputEditAction {
     private MainBottomDefaultBar mBtmDefaultBar;
     private MainBottomControlBar mBtmControlBar;
     private FrameLayout mPopMask;
@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener,O
     private ViewGroup ll_home_dynamic_contentView;
     private ContentViewDefault contentview_home_scroll;
     private ContentViewInput contentview_home_input;
+    private boolean isFirstPage = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +100,8 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener,O
             show();
         } else if (event.getActionInt() == Constants.POP_HIDE) {
             hide();
+        }else if(event.getActionInt() == Constants.GOFIRSTPAGE){
+            updateToDefaultContentView();
         }
     }
 
@@ -140,16 +143,21 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener,O
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mBtmDefaultBar.getPopMenuView().getVisibility() == View.VISIBLE) {
+        boolean isback = keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN;
+        if (isback && mBtmDefaultBar.getPopMenuView().getVisibility() == View.VISIBLE) {
             hide();
             return false;
         }
-        if (contentview_home_input.getVisibility()==View.VISIBLE && contentview_home_input.getCustomWebview().canGoBack()) {
+        if (contentview_home_input.getVisibility() == View.VISIBLE && contentview_home_input.getCustomWebview().canGoBack()) {
             contentview_home_input.getCustomWebview().goBack();
             return false;
         }
-        if (keyCode == KeyEvent.KEYCODE_BACK
-                && event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (isback && !isFirstPage) {
+            updateToDefaultContentView();
+            return false;
+        }
+        if (isback) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), R.string.str_exit, Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
@@ -195,15 +203,18 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener,O
     }
 
     @Override
-    public void updateToInputContentView() {
-        ll_home_dynamic_contentView.removeAllViews();
-        ll_home_dynamic_contentView.addView(contentview_home_input);
-        contentview_home_input.toggleSoftInput(true);
-    }
-
-    @Override
     public void updateToDefaultContentView() {
         ll_home_dynamic_contentView.removeAllViews();
         ll_home_dynamic_contentView.addView(contentview_home_scroll);
+        isFirstPage = true;
+    }
+
+    @Override
+    public void updateToInputContentView() {
+        ll_home_dynamic_contentView.removeAllViews();
+        ll_home_dynamic_contentView.addView(contentview_home_input);
+        isFirstPage = false;
+
+        contentview_home_input.toggleSoftInput(true);
     }
 }

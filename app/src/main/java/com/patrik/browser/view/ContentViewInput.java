@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.patrik.browser.R;
 import com.patrik.browser.base.OnInputEditAction;
+import com.patrik.browser.event.EvtHome;
 import com.patrik.browser.event.EvtInput;
 import com.patrik.browser.tool.Constants;
 
@@ -56,7 +57,11 @@ public class ContentViewInput extends LinearLayout implements View.OnClickListen
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void EvtInput(EvtInput event) {
         if (event.getActionInt() == Constants.GOBACK) {
-            webview_homepage.goBack();
+            if(webview_homepage.canGoBack()){
+                webview_homepage.goBack();
+            }else{
+                EventBus.getDefault().post(new EvtHome(Constants.GOFIRSTPAGE));
+            }
         } else if (event.getActionInt() == Constants.GOFORWARD) {
             webview_homepage.goForward();
         } else if (event.getActionInt() == Constants.LOADING) {
