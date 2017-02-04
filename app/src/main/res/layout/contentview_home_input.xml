@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!--height must match_parent,or will be blank appearence.(#patrik)2017/1/21.-->
+<com.patrik.browser.view.ContentViewInput xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_home_input" />
+
+    <com.patrik.browser.view.CustomWebview
+        android:id="@+id/webview_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/vmargin48dp">
+
+    </com.patrik.browser.view.CustomWebview>
+</com.patrik.browser.view.ContentViewInput>

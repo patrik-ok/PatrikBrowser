@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.patrik.browser.R;
+import com.patrik.browser.base.BaseActivity;
+import com.patrik.browser.base.OnInputEditAction;
 import com.patrik.browser.event.EvtHome;
 import com.patrik.browser.tool.Constants;
-import com.patrik.browser.view.CustomWebview;
+import com.patrik.browser.view.ContentViewDefault;
+import com.patrik.browser.view.ContentViewInput;
 import com.patrik.browser.view.MainBottomControlBar;
 import com.patrik.browser.view.MainBottomDefaultBar;
 import com.patrik.browser.view.PopMenuView;
@@ -28,13 +31,15 @@ import org.greenrobot.eventbus.ThreadMode;
  * Create by patrik on 2016/8/29.
  */
 
-public class MainActivity extends BaseActivity implements View.OnTouchListener {
+public class MainActivity extends BaseActivity implements View.OnTouchListener,OnInputEditAction {
     private MainBottomDefaultBar mBtmDefaultBar;
     private MainBottomControlBar mBtmControlBar;
     private FrameLayout mPopMask;
     private Handler mHandler = new Handler();
-    private ScrollView scrollView_homepage;
-    private CustomWebview webview_homepage;
+    private long exitTime = 0;
+    private ViewGroup ll_home_dynamic_contentView;
+    private ContentViewDefault contentview_home_scroll;
+    private ContentViewInput contentview_home_input;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,9 +83,14 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener {
         mBtmDefaultBar = (MainBottomDefaultBar) main_view_stub_one.inflate();
         ViewStub main_view_stub_two = (ViewStub) findViewById(R.id.main_view_stub_two);
         mBtmControlBar = (MainBottomControlBar) main_view_stub_two.inflate();
-        scrollView_homepage = (ScrollView) findViewById(R.id.scrollView_homepage);
-        webview_homepage = (CustomWebview) findViewById(R.id.webview_homepage);
-        webview_homepage.loadUrl(Constants.DEFAULT_URL);
+
+        contentview_home_input = (ContentViewInput) View.inflate(this, R.layout.contentview_home_input, null);
+        contentview_home_scroll = (ContentViewDefault) View.inflate(this, R.layout.contentview_home_scroll, null);
+        contentview_home_scroll.setOnInputEditAction(this);
+        contentview_home_input.setOnInputEditAction(this);
+        ll_home_dynamic_contentView = (ViewGroup) findViewById(R.id.ll_home_dynamic_contentView);
+        ll_home_dynamic_contentView.removeAllViews();
+        ll_home_dynamic_contentView.addView(contentview_home_scroll);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -89,10 +99,6 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener {
             show();
         } else if (event.getActionInt() == Constants.POP_HIDE) {
             hide();
-        } else if (event.getActionInt() == Constants.GOBACK) {
-           webview_homepage.goBack();
-        } else if (event.getActionInt() == Constants.GOFORWARD) {
-           webview_homepage.goForward();
         }
     }
 
@@ -138,11 +144,25 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener {
             hide();
             return false;
         }
-        if (webview_homepage.canGoBack()) {
-            webview_homepage.goBack();
+        if (contentview_home_input.getVisibility()==View.VISIBLE && contentview_home_input.getCustomWebview().canGoBack()) {
+            contentview_home_input.getCustomWebview().goBack();
             return false;
         }
-        finish();
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), R.string.str_exit, Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                MainActivity.this.getWindow().getDecorView().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 150);
+            }
+            return true;
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -172,5 +192,18 @@ public class MainActivity extends BaseActivity implements View.OnTouchListener {
             result = false;
         }
         return result;
+    }
+
+    @Override
+    public void updateToInputContentView() {
+        ll_home_dynamic_contentView.removeAllViews();
+        ll_home_dynamic_contentView.addView(contentview_home_input);
+        contentview_home_input.toggleSoftInput(true);
+    }
+
+    @Override
+    public void updateToDefaultContentView() {
+        ll_home_dynamic_contentView.removeAllViews();
+        ll_home_dynamic_contentView.addView(contentview_home_scroll);
     }
 }

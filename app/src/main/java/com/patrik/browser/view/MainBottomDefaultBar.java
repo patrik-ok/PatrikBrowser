@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.patrik.browser.R;
 import com.patrik.browser.event.EvtBtmBar;
 import com.patrik.browser.event.EvtHome;
+import com.patrik.browser.event.EvtInput;
 import com.patrik.browser.tool.Constants;
 
 import org.greenrobot.eventbus.EventBus;
@@ -79,11 +80,11 @@ public class MainBottomDefaultBar extends LinearLayout implements View.OnClickLi
     }
 
     private void bottomBackClick() {
-        EventBus.getDefault().post(new EvtHome(Constants.GOBACK));
+        EventBus.getDefault().post(new EvtInput(Constants.GOBACK));
     }
 
     private void bottomGoForwardClick() {
-        EventBus.getDefault().post(new EvtHome(Constants.GOFORWARD));
+        EventBus.getDefault().post(new EvtInput(Constants.GOFORWARD));
     }
 
     private void bottomPopClick() {

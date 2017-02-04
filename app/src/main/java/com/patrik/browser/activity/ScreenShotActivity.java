@@ -6,13 +6,14 @@ import android.view.ViewStub;
 import android.view.WindowManager;
 
 import com.patrik.browser.R;
+import com.patrik.browser.base.BaseActivity;
 import com.patrik.browser.view.CropView;
 
 /**
  * ScreenShot
  * Create by patrik on 2016/8/29.
  */
-public class ScreenShotActivity extends BaseActivity{
+public class ScreenShotActivity extends BaseActivity {
     public Rect windowRc;
     public int mBottomHeight;
     @Override

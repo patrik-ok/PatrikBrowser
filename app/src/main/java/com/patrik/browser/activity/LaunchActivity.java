@@ -3,8 +3,11 @@ package com.patrik.browser.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 
 import com.anthonycr.grant.PermissionsManager;
 import com.anthonycr.grant.PermissionsResultAction;
@@ -48,8 +51,12 @@ public class LaunchActivity extends Activity {
 
                     @Override
                     public void onDenied(String permission) {
-                        ToastUtils.getInstance(LaunchActivity.this).showToast(R.string.str_permisson_deny);
-                        finish();
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(LaunchActivity.this,permission)){
+                            ToastUtils.getInstance(LaunchActivity.this).showToast(R.string.str_permisson_deny);
+                            finish();
+                        }else{
+                            goToAppDetailSettingUI();
+                        }
                     }
                 });
         LogUtils.e(className, packageName, "oncreate");
@@ -59,5 +66,19 @@ public class LaunchActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+    }
+
+    private void goToAppDetailSettingUI() {
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 9) {
+            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+        } else if (Build.VERSION.SDK_INT <= 8) {
+            localIntent.setAction(Intent.ACTION_VIEW);
+            localIntent.setClassName("com.android.settings","com.android.settings.InstalledAppDetails");
+            localIntent.putExtra("com.android.settings.ApplicationPkgName", getPackageName());
+        }
+        startActivity(localIntent);
     }
 }

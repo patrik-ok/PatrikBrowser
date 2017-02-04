@@ -10,14 +10,16 @@
     <!--margin -->
     <dimen name="vmargin0.5dp">0.5dp</dimen>
     <dimen name="vmargin10dp">10dp</dimen>
+    <dimen name="vmargin22dp">22dp</dimen>
     <dimen name="vmargin48dp">48dp</dimen>
     <!--padding -->
     <dimen name="vpadding10dp">10dp</dimen>
     <dimen name="vpadding15dp">15dp</dimen>
     <dimen name="vpadding48dp">48dp</dimen>
     <!--height-->
-    <dimen name="vheight85.5dp">85.5dp</dimen>
+    <dimen name="vheight36dp">36dp</dimen>
     <dimen name="vheight48dp">48dp</dimen>
+    <dimen name="vheight85.5dp">85.5dp</dimen>
 
 
     <!--horizontal-->
@@ -30,5 +32,7 @@
 
 
     <!--normal-->
-    <dimen name="padding2dp">2dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
 </resources>

@@ -112,7 +112,7 @@
                     android:gravity="center"
                     android:textSize="@dimen/text_size_12"
                     android:textColor="@color/color_444444"
-                    android:drawablePadding="@dimen/padding2dp"
+                    android:drawablePadding="@dimen/dimen_2dp"
                     android:drawableTop="@mipmap/update_black"
                     android:text="@string/str_update" />
                 <ImageView

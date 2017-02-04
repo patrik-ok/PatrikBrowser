@@ -1,4 +1,4 @@
-package com.patrik.browser.activity;
+package com.patrik.browser.base;
 
 import android.content.Intent;
 import android.graphics.Color;

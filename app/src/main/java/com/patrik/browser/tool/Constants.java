@@ -28,4 +28,7 @@ public class Constants {
     public static final int CANNOT_GOBACK = CANNOT_GOFORWARD + 1;
     public static final int GOFORWARD = CANNOT_GOBACK + 1;
     public static final int GOBACK = GOFORWARD + 1;
+    public static final int LOADING = GOBACK + 1;
+    public static final int PAGEFINISH = LOADING + 1;
+
 }

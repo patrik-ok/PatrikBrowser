@@ -13,8 +13,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.patrik.browser.event.EvtInput;
+import com.patrik.browser.tool.Constants;
 import com.patrik.browser.tool.LogUtils;
 import com.patrik.browser.tool.UrlUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * usage
@@ -43,7 +47,7 @@ public class CustomWebview extends WebView {
 
     private void initProgressBar(Context context) {
         //设置进度条(#patrik)2017/1/20.
-        mProgressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        mProgressBar = new ProgressBar(context.getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
         mProgressBar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 20, 0, 0));
         addView(mProgressBar);
     }
@@ -155,9 +159,11 @@ public class CustomWebview extends WebView {
         public void onProgressChanged(WebView view, int newProgress) {
             if (newProgress == 100) {
                 mProgressBar.setVisibility(GONE);
+                EventBus.getDefault().post(new EvtInput(Constants.PAGEFINISH));
             } else {
                 mProgressBar.setVisibility(VISIBLE);
                 mProgressBar.setProgress(newProgress);
+                EventBus.getDefault().post(new EvtInput(Constants.LOADING));
             }
             super.onProgressChanged(view, newProgress);
         }
@@ -182,5 +188,23 @@ public class CustomWebview extends WebView {
             return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
         }
 
+    }
+
+    @Override
+    public void destroy() {
+//        flushMessageQueue();
+        clearCache(true);
+        clearFormData();
+        clearMatches();
+        clearSslPreferences();
+        clearDisappearingChildren();
+        clearHistory();
+        //@Deprecated
+        //clearView();
+        clearAnimation();
+//        loadUrl("about:blank");
+        removeAllViews();
+        freeMemory();
+        super.destroy();
     }
 }

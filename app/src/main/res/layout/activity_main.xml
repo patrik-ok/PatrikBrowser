@@ -5,23 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <ScrollView
-        android:id="@+id/scrollView_homepage"
+    <LinearLayout
+        android:id="@+id/ll_home_dynamic_contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/vmargin48dp"
-        android:visibility="gone">
-
-    </ScrollView>
-    <!--height must match_parent,or will be blank appearence.(#patrik)2017/1/21.-->
-    <com.patrik.browser.view.CustomWebview
-        android:id="@+id/webview_homepage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="@dimen/vmargin48dp">
-
-    </com.patrik.browser.view.CustomWebview>
+        android:layout_marginTop="@dimen/vmargin22dp"
+        android:orientation="vertical">
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/pop_mask"

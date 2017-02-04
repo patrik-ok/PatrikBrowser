@@ -13,4 +13,8 @@
     <string name="str_bright">Bright</string>
     <string name="str_update">Update</string>
     <string name="str_permisson_deny">Permission denied</string>
+    <string name="str_enter_url">Enter URL</string>
+    <string name="str_action_go">Go</string>
+    <string name="str_action_cancel">Cancel</string>
+    <string name="str_exit">Press back again to exit</string>
 </resources>
